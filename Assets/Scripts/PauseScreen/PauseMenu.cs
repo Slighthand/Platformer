@@ -22,5 +22,15 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
-    //public void Restart()  do we need a restart level?
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+
+    public void Settings()
+    {
+        SceneManager.LoadScene("Settings");
+        Time.timeScale = 1;
+    }
 }

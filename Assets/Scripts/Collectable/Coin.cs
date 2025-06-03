@@ -22,7 +22,7 @@ public class Coin : MonoBehaviour
         //new Vector3(-178, -3, 37),
     };
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         // make player inventory
         //PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
@@ -35,7 +35,7 @@ public class Coin : MonoBehaviour
         //    count++;
         //}
     }
-    private void Spawn(int count)
+    public virtual void Spawn(int count)
     {
         // Increment count and check if within spawn positions array
         if (count <= spawnPositions.Length)

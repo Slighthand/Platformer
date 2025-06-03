@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour
         tempPose = transform.position;
         tempPose.y = player.position.y;
         tempPose.x = player.position.x;
+       
 
         transform.position = tempPose;
     }

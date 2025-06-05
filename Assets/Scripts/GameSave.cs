@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSave : MonoBehaviour
 {
     // Start is called before the first frame update
+   public Transform Player;
     void Start()
     {
         
@@ -13,6 +14,6 @@ public class GameSave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PlayerPrefs.SetFloat("Position", Player.position.x);
     }
 }

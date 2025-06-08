@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Home()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("StartMenu");
         Time.timeScale = 1;
     }
     public void Resume()
@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Settings()
     {
-        SceneManager.LoadScene("Settings");
+        SceneManager.LoadScene("SettingsScreen");
         Time.timeScale = 1;
     }
 }

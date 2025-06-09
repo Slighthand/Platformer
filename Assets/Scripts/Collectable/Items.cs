@@ -5,11 +5,14 @@ using UnityEngine;
 public class Items : MonoBehaviour
 {
     public int[] pointsArr;
-    public static int count;
+    private static int count;
+
+    public GameObject ItemPrefab; 
     public void AddPoints()
     {
 
     }
+
 
     // Start is called before the first frame update
     void Start()

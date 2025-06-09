@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
     private static int count;
     // Array of predefined spawn positions
     [SerializeField]
-    private Vector3[] spawnPositions = new Vector3[]
+    public Vector3[] spawnPositions = new Vector3[]
     {
         //new Vector3(28, -3, -79),
         //new Vector3(-145, -3, -57),
@@ -22,19 +22,19 @@ public class Coin : MonoBehaviour
         //new Vector3(-178, -3, 37),
     };
 
-    public virtual void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        //PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
+        PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
 
-        //if (playerInventory != null)
-        //{
-        //    gameObject.SetActive(false);
-        //    playerInventory.CoinCollected();
-        //    Spawn(count);
-        //    count++;
-        //}
+        if (playerInventory != null)
+        {
+            gameObject.SetActive(false);
+            playerInventory.CoinCollected();
+            Spawn(count);
+            count++;
+        }
     }
-    public virtual void Spawn(int count)
+    public void Spawn(int count)
     {
         // Increment count and check if within spawn positions array
         if (count <= spawnPositions.Length)

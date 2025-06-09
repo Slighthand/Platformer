@@ -24,7 +24,6 @@ public class Coin : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        // make player inventory
         //PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
 
         //if (playerInventory != null)

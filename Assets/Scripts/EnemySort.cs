@@ -25,10 +25,10 @@ public class EnemySort : MonoBehaviour
             }
         }
 
-        foreach (int n in numbers)
-        {
-            Debug.Log(n);
-        }
+        // foreach (int n in numbers)
+        // {
+        //     Debug.Log(n);
+        // }
     }
     public static void Main(string[] args)
     {

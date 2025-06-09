@@ -5,15 +5,12 @@ using UnityEngine;
 public class GameSave : MonoBehaviour
 {
     // Start is called before the first frame update
-   public Transform Player;
-    void Start()
-    {
-        
-    }
+    public const string DUNGEON_SAVEDATA = "/savedata.json";
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        PlayerPrefs.SetFloat("Position", Player.position.x);
-    }
+[SerializeField]
+public class PlayerData
+{
+    [SerializeField] public List<Vector3> positions;
+    // public PlayerData(PlayerManager); - set instance for player position in the player movement script.
 }

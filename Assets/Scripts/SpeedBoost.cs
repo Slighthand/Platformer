@@ -1,11 +1,11 @@
 
 
-public class SpeedBoost : PowerUps
-{
-    public SpeedBoost(Sprite icon) : base("Speed Boost", 50, icon) { }
+//public class SpeedBoost : PowerUps
+//{
+//    public SpeedBoost(Sprite icon) : base("Speed Boost", 50, icon) { }
 
-    public override void ApplyEffect(GameObject player)
-    {
-        player.GetComponent<PlayerController>().moveSpeed += 2f;
-    }
-}
+//    public override void ApplyEffect(GameObject player)
+//    {
+//        player.GetComponent<PlayerController>().moveSpeed += 2f;
+//    }
+//}

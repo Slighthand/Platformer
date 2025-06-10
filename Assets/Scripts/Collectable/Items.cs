@@ -2,8 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Items : MonoBehaviour
 {
+    public int[] pointsArr;
+    private static int count;
+
+    public GameObject ItemPrefab; 
+    public void AddPoints()
+    {
+
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

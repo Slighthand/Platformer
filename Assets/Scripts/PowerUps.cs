@@ -4,7 +4,7 @@ public class PowerUps
 {
     public string Name;
     public int Cost;
-    public Sprite Icon;
+    // public Sprite Icon;
     public int Quantity;
 
     public PowerUps(string name, int cost, Sprite icon)
@@ -15,5 +15,5 @@ public class PowerUps
         Quantity = 0;
     }
 
-    public virtual void ApplyEffect(GameObject player) { }
-}
+//     public virtual void ApplyEffect(GameObject player) { }
+// }

@@ -1,8 +1,8 @@
+//using UnityEngine;
 
+//[CreateAssetMenu(fileName = "ExtraHeart", menuName = "ScriptableObjects/Extra Heart")]
 //public class ExtraHeart : PowerUps
 //{
-//    public ExtraHeart() : base("Extra Heart", 75) { }
-
 //    public override void ApplyEffect(GameObject player)
 //    {
 //        PlayerHealth health = player.GetComponent<PlayerHealth>();

@@ -132,7 +132,7 @@ ScriptedImporter:
       y: 4
       width: 16
       height: 16
-    spriteID: d712c16235475ef4bbf1ef3f71bec45c
+    spriteID: 4cf32bfccf39c874284b7c153fe552f3
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -152,7 +152,7 @@ ScriptedImporter:
       y: 28
       width: 16
       height: 16
-    spriteID: 0eb7824dfe7bd3541b54f4427bc87253
+    spriteID: fee2fbfaf0d55dd44bf7ed528e4d9aea
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -172,7 +172,7 @@ ScriptedImporter:
       y: 52
       width: 16
       height: 16
-    spriteID: ba9b845877622c44db9ac571ca39a198
+    spriteID: b9b98b654ac581d489916eb15d932760
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -192,7 +192,7 @@ ScriptedImporter:
       y: 76
       width: 16
       height: 16
-    spriteID: 7e1abdb6f4c18594899f5cf02af7a71f
+    spriteID: f7005ee99e30cad458291aa3013b3260
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -212,7 +212,7 @@ ScriptedImporter:
       y: 100
       width: 16
       height: 16
-    spriteID: 5cb5f345316bfd44083b26a4a6fbbeba
+    spriteID: 3e11607b34b2eae439d6d1941bd1ad31
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -238,7 +238,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: d712c16235475ef4bbf1ef3f71bec45c
+      spriteId: 4cf32bfccf39c874284b7c153fe552f3
     - name: advanced rule tile icons_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -247,7 +247,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: 0eb7824dfe7bd3541b54f4427bc87253
+      spriteId: fee2fbfaf0d55dd44bf7ed528e4d9aea
     - name: advanced rule tile icons_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -256,7 +256,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: ba9b845877622c44db9ac571ca39a198
+      spriteId: b9b98b654ac581d489916eb15d932760
     - name: advanced rule tile icons_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -265,7 +265,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: 7e1abdb6f4c18594899f5cf02af7a71f
+      spriteId: f7005ee99e30cad458291aa3013b3260
     - name: advanced rule tile icons_Frame_4
       frameIndex: 4
       additiveSortOrder: 0
@@ -274,7 +274,7 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: 5cb5f345316bfd44083b26a4a6fbbeba
+      spriteId: 3e11607b34b2eae439d6d1941bd1ad31
     linkedCells: []
     parentIndex: -1
   platformSettings:

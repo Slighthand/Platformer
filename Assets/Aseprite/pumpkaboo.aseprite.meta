@@ -132,7 +132,7 @@ ScriptedImporter:
       y: 4
       width: 64
       height: 48
-    spriteID: 3538843059931ec4692cf544898d9075
+    spriteID: 0a57174bc2e8fab4eb23822850f6aa6d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -152,7 +152,7 @@ ScriptedImporter:
       y: 60
       width: 64
       height: 48
-    spriteID: e11bb0d4d8d584441b88cdff6fe2f033
+    spriteID: cde76a158acd77649a71f01b677fb854
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -172,7 +172,7 @@ ScriptedImporter:
       y: 116
       width: 64
       height: 48
-    spriteID: 7714abbaf7732214bb1a1cc41dd9d157
+    spriteID: 3ef5ae2fe453c4045b3a370b2fcbdf56
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -198,7 +198,7 @@ ScriptedImporter:
         y: 0
         width: 64
         height: 48
-      spriteId: 3538843059931ec4692cf544898d9075
+      spriteId: 0a57174bc2e8fab4eb23822850f6aa6d
     - name: pumpkaboo_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -207,7 +207,7 @@ ScriptedImporter:
         y: 0
         width: 64
         height: 48
-      spriteId: e11bb0d4d8d584441b88cdff6fe2f033
+      spriteId: cde76a158acd77649a71f01b677fb854
     - name: pumpkaboo_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -216,7 +216,7 @@ ScriptedImporter:
         y: 0
         width: 64
         height: 48
-      spriteId: 7714abbaf7732214bb1a1cc41dd9d157
+      spriteId: 3ef5ae2fe453c4045b3a370b2fcbdf56
     linkedCells: []
     parentIndex: -1
   platformSettings:

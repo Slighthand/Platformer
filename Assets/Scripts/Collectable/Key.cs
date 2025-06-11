@@ -5,17 +5,11 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
     [SerializeField]
-    private static int count;
+    private static int _keyCount;
     [SerializeField]
     private string colour;
-    // Array of predefined spawn positions
-    [SerializeField]
-    private Vector3[] spawnPositions = new Vector3[]
-    {
-        //new Vector3(28, -3, -79),
-        //new Vector3(-145, -3, -57),
-        //new Vector3(-64, -1, -14),
-    };
+    public GameObject door;
+    private bool doorDestroyed;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -26,13 +20,16 @@ public class Key : MonoBehaviour
             gameObject.SetActive(false);
             playerInventory.CoinCollected();
             // add color to array and sort in alpha order
-            count++;
+            _keyCount++;
         }
-        if (count == 3)
-            UnlockDoor();
     }
-    public void UnlockDoor()
-    {
 
+    private void Update()
+    {
+        if(_keyCount == 3 && !doorDestroyed)
+        {
+            doorDestroyed = true;
+            Destroy(door);
+        }
     }
 }

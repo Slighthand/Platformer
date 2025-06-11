@@ -8,45 +8,46 @@ public class PlayerInventory : MonoBehaviour
     private string[] inventory;
     private string[] moreItems;
     private int _index;
-    public int NumberOfCoins { get; private set; } // all scripts can read the value,
-                                                   // but only this script can set the value
 
-    public UnityEvent<PlayerInventory> OnCoinCollected;
-    public void CoinCollected()
-    {
-        NumberOfCoins++;
-        OnCoinCollected.Invoke(this);
-    }
+    public CoinManager cm;
+
     public void Start()
     {
         string[] inventory = new string[10];
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Collectable"))
-        {
-            string itemType = collision.gameObject.GetComponent<Items>().ItemType;
-            Debug.Log("Collected an " + itemType);
-            if (_cursor <= inventory.Length)
-            {
-                inventory[_cursor++] = itemType;
-            }
-            else
-            {
-                string[] moreItems = new string[inventory.Length + 10];
-                for (_index = 0; _index < inventory.Length; _index++)
-                {
-                    moreItems[_index] = inventory[_index];
-                }
-                inventory[_cursor++] = itemType;
-            }
-            Debug.Log(inventory);
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Collectable"))
+    //    {
+    //        string itemType = collision.gameObject.GetComponent<Items>().ItemType;
+    //        Debug.Log("Collected an " + itemType);
+    //        if (_cursor <= inventory.Length)
+    //        {
+    //            inventory[_cursor++] = itemType;
+    //        }
+    //        else
+    //        {
+    //            string[] moreItems = new string[inventory.Length + 10];
+    //            for (_index = 0; _index < inventory.Length; _index++)
+    //            {
+    //                moreItems[_index] = inventory[_index];
+    //            }
+    //            inventory[_cursor++] = itemType;
+    //        }
+    //        Debug.Log(inventory);
 
-            Destroy(collision.gameObject);
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            cm.coinCount++;
         }
     }
-
 
     //private void Update()
     //{

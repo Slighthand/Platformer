@@ -18,7 +18,7 @@ public class Key : MonoBehaviour
         if (playerInventory != null)
         {
             gameObject.SetActive(false);
-            playerInventory.CoinCollected();
+            //playerInventory.CoinCollected();
             // add color to array and sort in alpha order
             _keyCount++;
         }

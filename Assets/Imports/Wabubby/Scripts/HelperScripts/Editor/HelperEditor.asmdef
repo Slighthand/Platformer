@@ -1,0 +1,18 @@
+{
+    "name": "HelperEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1cd081f03bc4cbb43bf43cde92bc9428"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

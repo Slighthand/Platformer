@@ -9,8 +9,6 @@ public class PlayerInventory : MonoBehaviour
     private string[] moreItems;
     private int _index;
 
-    public CoinManager cm;
-
     public void Start()
     {
         string[] inventory = new string[10];
@@ -45,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
-            cm.coinCount++;
+            CoinManager.coinCount++;
         }
     }
 

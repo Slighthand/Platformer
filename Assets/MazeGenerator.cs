@@ -21,6 +21,12 @@ public class MazeGenerator : MonoBehaviour
     public Transform coinPrefab;
     public List<Transform> coins = new();
 
+    [Header("Lava")]
+    public Tilemap LavaTilemap;
+    public TileBase Lava;
+    public float perlinScale = 0.1f;
+    [Range(0f, 1f)] public float lavaThreshold = 0.5f;
+
     private System.Random rand = new System.Random();
     private Vector2Int[] directions = new[] {
         Vector2Int.up * 2,
@@ -45,6 +51,8 @@ public class MazeGenerator : MonoBehaviour
 
         Carve(start, visited);
 
+        LavaTilemap.ClearAllTiles();
+        GenerateLava();
 
         int oldScale = scale;
         int oldWidth = Width;
@@ -63,7 +71,27 @@ public class MazeGenerator : MonoBehaviour
         SpawnCoins();
     }
 
+    void GenerateLava() {
+        BoundsInt bounds = LavaTilemap.cellBounds;
+        LavaTilemap.ClearAllTiles();
+
+        for (int x = -2; x < Width*scale; x++)
+        {
+            for (int y = -2; y < Height*scale; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                if (Tilemap.GetTile(pos) == Wall) continue;
+
+                float noise = Mathf.PerlinNoise(x * perlinScale, y * perlinScale);
+
+                if (noise > lavaThreshold) LavaTilemap.SetTile(pos, Lava);
+            }
+        }
+    }
+
     void Carve(Vector2Int pos, bool[,] visited, float chance=1) {
+        // RC BACKTRACKING WOOO
+
         visited[pos.x, pos.y] = true;
 
         Place(pos, Floor, chance);
@@ -119,6 +147,7 @@ public class MazeGenerator : MonoBehaviour
         foreach (Vector3Int pos in bounds.allPositionsWithin)
         {
             if (Tilemap.GetTile(pos) != Floor) continue;
+            if (LavaTilemap.GetTile(pos) == Lava) continue;
 
             int neighborCount = CountNeighbors(pos);
             float chance = baseCoinChance + additiveNeighborChance * neighborCount;

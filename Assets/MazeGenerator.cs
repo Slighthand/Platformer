@@ -5,13 +5,17 @@ using UnityEngine.Tilemaps;
 
 public class MazeGenerator : MonoBehaviour
 {
+    public Transform Player;
+    Vector3 playerStart;
+
+    [Header("Walls")]
     [Range(1, 5)] public int scale = 1;
     public Tilemap Tilemap;
     public TileBase Wall;
     public TileBase Floor;
     public int Width = 21;  // should be odd
     public int Height = 21; // should be odd
-    public Vector2Int start;
+    Vector2Int start;
     public float secondChance = 0.5f;
     float currentChance;
 
@@ -40,6 +44,10 @@ public class MazeGenerator : MonoBehaviour
     }
 
     void GenerateMaze()  {
+        start = new Vector2Int(Random.Range(0, Width/2)+1, Random.Range(0, Height/2)+1);
+        Player.transform.position = (scale * (Vector2) start) + new Vector2(2, 2);
+        playerStart = Player.transform.position;
+
         Tilemap.ClearAllTiles();
 
         // Fill entire grid with walls
@@ -81,6 +89,7 @@ public class MazeGenerator : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(x, y, 0);
                 if (Tilemap.GetTile(pos) == Wall) continue;
+                if ((pos - playerStart).sqrMagnitude < 5) continue;
 
                 float noise = Mathf.PerlinNoise(x * perlinScale, y * perlinScale);
 

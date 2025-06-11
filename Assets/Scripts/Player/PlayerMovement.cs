@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	protected void Update() {
-        physics.velocity = speed * input.Movement;
+        physics.velocity = speed * input.Movement.normalized;
 	}
 
 }

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3657067004424291703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3657067004424291701}
+  - component: {fileID: 3657067004424291700}
+  m_Layer: 0
+  m_Name: PaletteSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3657067004424291701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657067004424291703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.072588265, y: 1.0811685, z: -10.084234}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3657067004424291700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657067004424291703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53dbdb9785391f84593cbfac57056447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoPersist: 0
+  PaletteSwapMat: {fileID: 2100000, guid: 8df2e3f7bfa427743b04074963cacbf6, type: 2}
+  PaletteGradients:
+  - {fileID: 2800000, guid: d95d10413f2eb6f4781140eaafeabe4c, type: 3}
+  - {fileID: 2800000, guid: d011cfb3bbcc7d448ac02db6e30587a7, type: 3}
+  - {fileID: 2800000, guid: c5dfb5f32daec0048bafce66c10790f0, type: 3}
+  - {fileID: 2800000, guid: 7a5dbc88987629d4e894c412942b590f, type: 3}
+  - {fileID: 2800000, guid: e38726347458d534cbee3005142c8967, type: 3}
+  - {fileID: 2800000, guid: f47c44afa6924b444a1656db74ecf5e8, type: 3}
+  - {fileID: 2800000, guid: 324dedcb392df2d46a25b02354b3e149, type: 3}
+  - {fileID: 2800000, guid: e1b91eaec0342254e8499e190104f7be, type: 3}
+  - {fileID: 2800000, guid: fb1f611232a6971499ae241dbbe021b4, type: 3}
+  - {fileID: 2800000, guid: 9381ee7c4beb69d4c97dcc90e92df1a4, type: 3}
+  - {fileID: 2800000, guid: 2c388df715cf42b4fa77b2ca3458cce8, type: 3}
+  SparePaletteGradients: []
+  PaletteGradientIndex: 5
+  LightModePalletes: 0400000008000000

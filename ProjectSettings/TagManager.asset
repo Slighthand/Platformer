@@ -10,12 +10,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Midground
+  - Enemy
+  - Lava
   - 
   - 
   - 
@@ -40,8 +40,8 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: TextLayer
-    uniqueID: 2299504339
+  - name: Background
+    uniqueID: 122649187
     locked: 0
   - name: Default
     uniqueID: 0

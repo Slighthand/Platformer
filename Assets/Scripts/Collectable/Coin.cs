@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : Items
 {
     [SerializeField]
     private GameObject coinPrefab; //make coin prefab
 
-    private static int count;
+    public Coin(string itemType, int value) : base("coin", 1) { }
+    
+    //private static int count;
     // Array of predefined spawn positions
     [SerializeField]
     public Vector3[] spawnPositions = new Vector3[]
@@ -22,18 +24,18 @@ public class Coin : MonoBehaviour
         //new Vector3(-178, -3, 37),
     };
 
-    public void OnTriggerEnter(Collider other)
-    {
-        PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
 
-        if (playerInventory != null)
-        {
-            gameObject.SetActive(false);
-            playerInventory.CoinCollected();
-            Spawn(count);
-            count++;
-        }
-    }
+    //    if (playerInventory != null)
+    //    {
+    //        gameObject.SetActive(false);
+    //        playerInventory.CoinCollected();
+    //        Spawn(count);
+    //        count++;
+    //    }
+    //}
     public void Spawn(int count)
     {
         // Increment count and check if within spawn positions array

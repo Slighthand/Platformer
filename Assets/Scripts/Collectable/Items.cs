@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    public int[] pointsArr;
-    private static int count;
+    public string ItemType;
+    public int Value;
+    public int Count;
 
-    public GameObject ItemPrefab; 
-    public void AddPoints()
+    public Items(string itemType, int value)
     {
-
+        this. ItemType = itemType;
+        this. Value = value;
+        this.Count = 0;
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

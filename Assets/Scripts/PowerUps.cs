@@ -1,6 +1,8 @@
 
+//using UnityEngine;
 
-//public class PowerUps 
+//[CreateAssetMenu(fileName = "PowerUpData", menuName = "ScriptableObjects/PowerUpData")]
+//public class PowerUps : ScriptableObject
 //{
 //    public string Name;
 //    public int Cost;
@@ -9,7 +11,7 @@
 
 //    public PowerUps(string name, int cost, Sprite icon)
 //    {
-//        Name = name; 
+//        Name = name;
 //        Cost = cost;
 //        Icon = icon;
 //        Quantity = 0;

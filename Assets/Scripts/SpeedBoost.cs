@@ -1,11 +1,13 @@
+//using UnityEngine;
 
-
+//[CreateAssetMenu(fileName = "SpeedBoost", menuName = "ScriptableObjects/Speed Boost")]
 //public class SpeedBoost : PowerUps
 //{
-//    public SpeedBoost(Sprite icon) : base("Speed Boost", 50, icon) { }
-
 //    public override void ApplyEffect(GameObject player)
 //    {
-//        player.GetComponent<PlayerController>().moveSpeed += 2f;
+//        if (player.TryGetComponent<PlayerMovement>(out var controller))
+//        {
+//            controller.moveSpeed += 2f;
+//        }
 //    }
 //}

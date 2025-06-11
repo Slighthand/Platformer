@@ -15,6 +15,12 @@ public class MazeGenerator : MonoBehaviour
     public float secondChance = 0.5f;
     float currentChance;
 
+    [Header("Coins")]
+    public float baseCoinChance = 1f/20f;
+    public float additiveNeighborChance = 1f/20f;
+    public Transform coinPrefab;
+    public List<Transform> coins = new();
+
     private System.Random rand = new System.Random();
     private Vector2Int[] directions = new[] {
         Vector2Int.up * 2,
@@ -53,6 +59,8 @@ public class MazeGenerator : MonoBehaviour
         scale = oldScale;
         Width = oldWidth;
         Height = oldHeight;
+
+        SpawnCoins();
     }
 
     void Carve(Vector2Int pos, bool[,] visited, float chance=1) {
@@ -101,6 +109,53 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
+
+    public void SpawnCoins()
+    {
+        DeleteAllCoins();
+
+        BoundsInt bounds = Tilemap.cellBounds;
+
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            if (Tilemap.GetTile(pos) != Floor) continue;
+
+            int neighborCount = CountNeighbors(pos);
+            float chance = baseCoinChance + additiveNeighborChance * neighborCount;
+
+            if (Random.value < chance)
+            {
+                Vector3 worldPos = Tilemap.GetCellCenterWorld(pos);
+                coins.Add(Instantiate(coinPrefab, worldPos, Quaternion.identity, transform));
+            }
+        }
+    }
+    
+    void DeleteAllCoins() {
+        foreach (Transform coin in coins) {
+            DestroyImmediate(coin.gameObject);
+        }
+        coins.Clear();
+    }
+
+    int CountNeighbors(Vector3Int pos)
+    {
+        Vector3Int[] offsets = {
+            Vector3Int.up, Vector3Int.down,
+            Vector3Int.left, Vector3Int.right,
+            new Vector3Int(-1, 1, 0), new Vector3Int(1, 1, 0),
+            new Vector3Int(-1, -1, 0), new Vector3Int(1, -1, 0)
+        };
+
+        int count = 0;
+        foreach (var offset in offsets)
+        {
+            if (Tilemap.GetTile(pos + offset) == Wall)
+                count++;
+        }
+        return count;
+    }
+
 
     public void Regenerate() => GenerateMaze();
 }

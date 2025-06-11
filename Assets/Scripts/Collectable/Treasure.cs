@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Treasure
+public class Treasure: Items
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Treasure(string itemType, int value) : base("treasure", 5) { }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

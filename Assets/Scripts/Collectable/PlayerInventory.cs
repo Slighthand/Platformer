@@ -4,14 +4,49 @@ public class PlayerInventory : MonoBehaviour
 {
     //static int scoreGoal = 8;
     //use for key
-    public int NumberOfCoins { get; private set; } // all scripts can read the value,
-                                                   // but only this script can set the value
+    private int _cursor;
+    private string[] inventory;
+    private string[] moreItems;
+    private int _index;
 
-    public UnityEvent<PlayerInventory> OnCoinCollected;
-    public void CoinCollected()
+    public CoinManager cm;
+
+    public void Start()
     {
-        NumberOfCoins++;
-        OnCoinCollected.Invoke(this);
+        string[] inventory = new string[10];
+    }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Collectable"))
+    //    {
+    //        string itemType = collision.gameObject.GetComponent<Items>().ItemType;
+    //        Debug.Log("Collected an " + itemType);
+    //        if (_cursor <= inventory.Length)
+    //        {
+    //            inventory[_cursor++] = itemType;
+    //        }
+    //        else
+    //        {
+    //            string[] moreItems = new string[inventory.Length + 10];
+    //            for (_index = 0; _index < inventory.Length; _index++)
+    //            {
+    //                moreItems[_index] = inventory[_index];
+    //            }
+    //            inventory[_cursor++] = itemType;
+    //        }
+    //        Debug.Log(inventory);
+
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            cm.coinCount++;
+        }
     }
 
     //private void Update()

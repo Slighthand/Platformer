@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5533060670021037081}
   m_Layer: 0
   m_Name: Key
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,6 +90,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25224cf0d0acf5a4ca2227dd4b8a3c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPrefab: {fileID: 6133089515542896955}
   colour: 
   spawnPositions: []

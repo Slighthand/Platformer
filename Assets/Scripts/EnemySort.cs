@@ -4,36 +4,75 @@ using UnityEngine;
 
 public class EnemySort : MonoBehaviour
 {
-    int first = 1;
-    int second = 2;
-    int third = 3;
-    int fourth = 4;
-    // sort enemies by distance
-    public static void BubbleSort(int[] numbers)
+    public class Quest
     {
-        for (int j = 0; j < numbers.Length; j++)
+        public string Title;
+        public Vector3 TargetLocation; // The coordinates of the quest objective
+        public float ProximityToPlayer; // This value is updated
+
+        public Quest(string title, Vector3 targetLocation)
         {
-            for (int i = 0; i < numbers.Length - 1; i++)
-            {
-                Debug.Log(numbers[i] + " " + numbers[i + 1]);
-                if (numbers[i] > numbers[i + 1])
-                {
-                    int tmp = numbers[i];
-                    numbers[i] = numbers[i + 1];
-                    numbers[i + 1] = tmp;
-                }
-            }
+            this.Title = title;
+            this.TargetLocation = targetLocation;
+            this.ProximityToPlayer = 0f; 
         }
 
-        // foreach (int n in numbers)
-        // {
-        //     Debug.Log(n);
-        // }
+        public override string ToString()
+        {
+            // Format ProximityToPlayer to one decimal place for cleaner output
+            return $"{Title} (Distance: {ProximityToPlayer:F1}m)";
+        }
     }
-    public static void Main(string[] args)
+    public string Title;
+    public Vector3 TargetLocation; // The world coordinates of the quest objective
+    public float ProximityToPlayer;
+    public Transform playerTransform;
+    public List<Quest> activeQuests = new List<Quest>();
+    // sort enemies by distance
+    public void SortQuestsByProximity()
     {
-        int[] nums = new int[] {6,4,3,5,2,1};
-        BubbleSort(nums);
+        if (playerTransform == null)
+        {
+            Debug.LogError("Cannot sort quests: Player Transform is null.");
+            return;
+        }
+
+        // Step 1: Update the ProximityToPlayer for each quest
+        // This must happen BEFORE sorting, as distances change with player movement.
+        Vector3 currentPlayerPosition = playerTransform.position;
+        foreach (Quest quest in activeQuests)
+        {
+            quest.ProximityToPlayer = Vector3.Distance(currentPlayerPosition, quest.TargetLocation);
+        }
+
+        // Step 2: Perform Bubble Sort on the list based on ProximityToPlayer
+        int n = activeQuests.Count;
+        bool swapped; // Flag to check if any swaps occurred in a pass
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            swapped = false; // Reset for each pass
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                // Compare adjacent quests based on ProximityToPlayer
+                // We want to sort in ascending order (closest first)
+                if (activeQuests[j].ProximityToPlayer > activeQuests[j + 1].ProximityToPlayer)
+                {
+                    // If the current quest is further than the next one, swap them
+                    Quest tmp = activeQuests[j];
+                    activeQuests[j] = activeQuests[j + 1];
+                    activeQuests[j + 1] = tmp;
+                    swapped = true; // Mark that a swap occurred
+                }
+            }
+
+            // Optimization: If no two elements were swapped by the inner loop,
+            // it means the list is already sorted, so we can stop early.
+            if (swapped == false)
+            {
+                break;
+            }
+        }
     }
 
 }

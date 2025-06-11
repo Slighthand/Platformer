@@ -13,6 +13,7 @@ public class MazeGenerator : MonoBehaviour
     public int Height = 21; // should be odd
     public Vector2Int start;
     public float secondChance = 0.5f;
+    float currentChance;
 
     private System.Random rand = new System.Random();
     private Vector2Int[] directions = new[] {
@@ -23,7 +24,7 @@ public class MazeGenerator : MonoBehaviour
     };
 
     private void Start() {
-        GenerateMaze();
+        // GenerateMaze();
     }
 
     void GenerateMaze()  {
@@ -47,6 +48,7 @@ public class MazeGenerator : MonoBehaviour
         Width = Width*4-1;
         Height = Height*4-1;
         visited = new bool[Width, Height];
+        currentChance = 1;
         Carve(start, visited, secondChance);
         scale = oldScale;
         Width = oldWidth;
@@ -88,7 +90,9 @@ public class MazeGenerator : MonoBehaviour
     }
     
     void Place(Vector2Int pos, TileBase tile, float chance)  {
-        if (Random.Range(0f, 1f) > chance) return;
+        if (Random.Range(0f, 1f) > currentChance) return;
+        currentChance -= 0.1f;
+        if (currentChance < secondChance) currentChance = 1f;
 
         // Tilemap.SetTile((Vector3Int)pos, tile);
         for (int ox=0; ox<scale; ox++) {

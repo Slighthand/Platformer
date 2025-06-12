@@ -4,6 +4,7 @@ using UnityEditor.SceneManagement;
 using System.Linq;
 using System.Collections.Generic;
 
+
 // [CustomEditor(typeof(AreaComponent))]
 // public class AreaComponentEditor : Editor {
 //     private List<string> missingSavepoints = new List<string>();

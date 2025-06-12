@@ -11,21 +11,15 @@ public class MainMenuNavigator : LoadingGameSceneBase // inheritance to load the
 
     private void Start()
     {
-        // Optional: Automatically hook up the button's click event if assigned
         if (startGameButton != null)
         {
             startGameButton.onClick.AddListener(StartGame);
         }
         else
         {
-            Debug.LogWarning("Start Game Button is not assigned in the Inspector. You'll need to call StartGame() manually or via another event.");
+            Debug.LogWarning("Start Game Button is not assigned in the Inspector.");
         }
     }
-
-    /// <summary>
-    /// This method is called to initiate loading the main game scene.
-    /// It uses the LoadScene method inherited from SimpleSceneLoaderBase.
-    /// </summary>
     public void StartGame()
     {
         Debug.Log("Initiating game start from Main Menu...");

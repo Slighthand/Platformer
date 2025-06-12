@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
@@ -17,8 +18,13 @@ public class HealthBar : MonoBehaviour
     void Start() { SetHealthSlider(); }
 
 
-    public void SetHealthSlider() {
+    public void SetHealthSlider()
+    {
         slider.value = (float)health.CurrentHealth / health.MaxHealth;
         if (sliderfill != null && gradient != null) sliderfill.color = gradient.Evaluate(slider.value);
+        if (sliderfill == null) {
+            SceneManager.LoadScene("EndScreen");
+        }
     }
+    
 }

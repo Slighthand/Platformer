@@ -215,9 +215,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 613598020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0954592393f9eae4d8d6665afff6a1a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7058aa9b3d2af014882578215f28b290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: Game
+  startGameButton: {fileID: 0}
 --- !u!1 &793144369
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,9 +382,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 613598022}
+      - m_Target: {fileID: 613598020}
         m_TargetAssemblyTypeName: PlayButton, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: 
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

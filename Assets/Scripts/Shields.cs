@@ -1,18 +1,14 @@
+using UnityEngine;
 
-
-//public class Shields : PowerUps
-//{
-//    public float duration = 10f;
-
-//    public Shields() : base("Shields", 100) { }
-
-//    public override void ApplyEffect(GameObject player)
-//    {
-//        PlayerShield shields = player.GetComponent<PlayerShield>();
-//        if (shield != null)
-//        {
-//            shields.ActivateShields(duration);
-//            Debug.Log("Shields activated!");
-//        }
-//    }
-//}
+[CreateAssetMenu(fileName = "Shield", menuName = "PowerUps/Shield")]
+public class Shield : PowerUps
+{
+    public override void ApplyEffect(GameObject player)
+    {
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        if (movement != null)
+        {
+            movement.ActivateShield();
+        }
+    }
+}

@@ -10,7 +10,6 @@
 //        {
 //            health.maxHearts += 1;
 //            health.currentHearts += 1;
-//            Debug.Log("Extra Heart added!");
 //        }
 //    }
 //}

@@ -12,6 +12,7 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("Keys")]
     public Key key;
+    private bool _keyCollected;
     public string[] Keys = new string[5];
     public int Count = 0;
 
@@ -25,6 +26,7 @@ public class PlayerInventory : MonoBehaviour
         if (other.gameObject.CompareTag("Key"))
         {
             Debug.Log("Key collected");
+            _keyCollected = true;
             //key.BubbleSort(keys);
             Destroy(other.gameObject);
         }

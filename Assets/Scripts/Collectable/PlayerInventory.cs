@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
-            CoinManager.CoinCount++;
+            CoinManager.CoinCount += other.GetComponent<CoinPickup>().Value;
         }
         if (other.gameObject.CompareTag("Key"))
         {

@@ -22,6 +22,8 @@ public class MazeGenerator : MonoBehaviour
     [Header("Coins")]
     public float baseCoinChance = 1f/20f;
     public float additiveNeighborChance = 1f/20f;
+    public CoinPickup[] loot;
+    float totalWeight;
     public Transform coinPrefab;
     public List<Transform> coins = new();
 
@@ -43,7 +45,44 @@ public class MazeGenerator : MonoBehaviour
         // GenerateMaze();
     }
 
+    void SortLootTable()
+    {
+        totalWeight = 0f;
+        foreach (CoinPickup coin in loot)
+        {
+            totalWeight += coin.Weight;
+        }
+
+        // BUBBLE SORT -> GETS THE JOB DONE
+        for (int i = 0; i < loot.Length; i++)
+        {
+            for (int j = 0; j < loot.Length - 1; j++)
+            {
+                if (loot[j].Value > loot[j + 1].Value)
+                {
+                    // swap
+                    CoinPickup temp = loot[j];
+                    loot[j] = loot[j + 1];
+                    loot[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    CoinPickup GetCoinPickup()
+    {
+        float i = Random.Range(0f, totalWeight);
+        foreach (CoinPickup coin in loot)
+        {
+            i -= coin.Weight;
+            if (i <= 0) return coin;
+        }
+        return loot[0];
+    }
+
     void GenerateMaze()  {
+        SortLootTable();
+        
         start = new Vector2Int(Random.Range(0, Width/2)+1, Random.Range(0, Height/2)+1);
         Player.transform.position = (scale * (Vector2) start) + new Vector2(2, 2);
         playerStart = Player.transform.position;
@@ -51,8 +90,8 @@ public class MazeGenerator : MonoBehaviour
         Tilemap.ClearAllTiles();
 
         // Fill entire grid with walls
-        for (int x = -2; x < Width*scale; x++)
-            for (int y = -2; y < Height*scale; y++)
+        for (int x = -8; x < Width*scale+8; x++)
+            for (int y = -8; y < Height*scale+8; y++)
                 Tilemap.SetTile(new Vector3Int(x, y, 0), Wall);
 
         bool[,] visited = new bool[Width, Height];
@@ -164,7 +203,7 @@ public class MazeGenerator : MonoBehaviour
             if (Random.value < chance)
             {
                 Vector3 worldPos = Tilemap.GetCellCenterWorld(pos);
-                coins.Add(Instantiate(coinPrefab, worldPos, Quaternion.identity, transform));
+                coins.Add(Instantiate(GetCoinPickup().transform, worldPos, Quaternion.identity, transform));
             }
         }
     }

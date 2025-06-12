@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour
     public bool noRuby = false;
 
     [Header("Keys")]
+    public Key key;
     public string[] Keys = new string[5];
     public int Count = 0;
 
@@ -23,11 +24,15 @@ public class PlayerInventory : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Key"))
         {
-            Key key = other.GetComponentInParent<Key>();
-            Keys[Count++] = key.GetColour();
+            Debug.Log("Key collected");
             //key.BubbleSort(keys);
             Destroy(other.gameObject);
         }
+    }
+
+    public void AddKey(Key key)
+    {
+        Keys[Count++] = key.GetColour();
     }
 
     void Update()

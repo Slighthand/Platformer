@@ -24,18 +24,20 @@ public class Coin : Items
         //new Vector3(-178, -3, 37),
     };
 
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
+    // public void OnTriggerEnter(Collider other)
+    // {
+    // //    PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
 
-    //    if (playerInventory != null)
-    //    {
-    //        gameObject.SetActive(false);
-    //        playerInventory.CoinCollected();
-    //        Spawn(count);
-    //        count++;
-    //    }
-    //}
+    // //    if (playerInventory != null)
+    // //    {
+    // //        gameObject.SetActive(false);
+    // //        playerInventory.CoinCollected();
+    // //        Spawn(count);
+    // //    }
+    //     CoinManager.coinCount++;
+    //     Destroy(gameObject);
+    // }
+
     public void Spawn(int count)
     {
         // Increment count and check if within spawn positions array

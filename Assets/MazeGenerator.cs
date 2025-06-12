@@ -5,15 +5,31 @@ using UnityEngine.Tilemaps;
 
 public class MazeGenerator : MonoBehaviour
 {
+    public Transform Player;
+    Vector3 playerStart;
+
+    [Header("Walls")]
     [Range(1, 5)] public int scale = 1;
     public Tilemap Tilemap;
     public TileBase Wall;
     public TileBase Floor;
     public int Width = 21;  // should be odd
     public int Height = 21; // should be odd
-    public Vector2Int start;
+    Vector2Int start;
     public float secondChance = 0.5f;
     float currentChance;
+
+    [Header("Coins")]
+    public float baseCoinChance = 1f/20f;
+    public float additiveNeighborChance = 1f/20f;
+    public Transform coinPrefab;
+    public List<Transform> coins = new();
+
+    [Header("Lava")]
+    public Tilemap LavaTilemap;
+    public TileBase Lava;
+    public float perlinScale = 0.1f;
+    [Range(0f, 1f)] public float lavaThreshold = 0.5f;
 
     private System.Random rand = new System.Random();
     private Vector2Int[] directions = new[] {
@@ -28,6 +44,10 @@ public class MazeGenerator : MonoBehaviour
     }
 
     void GenerateMaze()  {
+        start = new Vector2Int(Random.Range(0, Width/2)+1, Random.Range(0, Height/2)+1);
+        Player.transform.position = (scale * (Vector2) start) + new Vector2(2, 2);
+        playerStart = Player.transform.position;
+
         Tilemap.ClearAllTiles();
 
         // Fill entire grid with walls
@@ -39,6 +59,8 @@ public class MazeGenerator : MonoBehaviour
 
         Carve(start, visited);
 
+        LavaTilemap.ClearAllTiles();
+        GenerateLava();
 
         int oldScale = scale;
         int oldWidth = Width;
@@ -53,9 +75,32 @@ public class MazeGenerator : MonoBehaviour
         scale = oldScale;
         Width = oldWidth;
         Height = oldHeight;
+
+        SpawnCoins();
+    }
+
+    void GenerateLava() {
+        BoundsInt bounds = LavaTilemap.cellBounds;
+        LavaTilemap.ClearAllTiles();
+
+        for (int x = -2; x < Width*scale; x++)
+        {
+            for (int y = -2; y < Height*scale; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+                if (Tilemap.GetTile(pos) == Wall) continue;
+                if ((pos - playerStart).sqrMagnitude < 5) continue;
+
+                float noise = Mathf.PerlinNoise(x * perlinScale, y * perlinScale);
+
+                if (noise > lavaThreshold) LavaTilemap.SetTile(pos, Lava);
+            }
+        }
     }
 
     void Carve(Vector2Int pos, bool[,] visited, float chance=1) {
+        // RC BACKTRACKING WOOO
+
         visited[pos.x, pos.y] = true;
 
         Place(pos, Floor, chance);
@@ -101,6 +146,54 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
+
+    public void SpawnCoins()
+    {
+        DeleteAllCoins();
+
+        BoundsInt bounds = Tilemap.cellBounds;
+
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            if (Tilemap.GetTile(pos) != Floor) continue;
+            if (LavaTilemap.GetTile(pos) == Lava) continue;
+
+            int neighborCount = CountNeighbors(pos);
+            float chance = baseCoinChance + additiveNeighborChance * neighborCount;
+
+            if (Random.value < chance)
+            {
+                Vector3 worldPos = Tilemap.GetCellCenterWorld(pos);
+                coins.Add(Instantiate(coinPrefab, worldPos, Quaternion.identity, transform));
+            }
+        }
+    }
+    
+    void DeleteAllCoins() {
+        foreach (Transform coin in coins) {
+            DestroyImmediate(coin.gameObject);
+        }
+        coins.Clear();
+    }
+
+    int CountNeighbors(Vector3Int pos)
+    {
+        Vector3Int[] offsets = {
+            Vector3Int.up, Vector3Int.down,
+            Vector3Int.left, Vector3Int.right,
+            new Vector3Int(-1, 1, 0), new Vector3Int(1, 1, 0),
+            new Vector3Int(-1, -1, 0), new Vector3Int(1, -1, 0)
+        };
+
+        int count = 0;
+        foreach (var offset in offsets)
+        {
+            if (Tilemap.GetTile(pos + offset) == Wall)
+                count++;
+        }
+        return count;
+    }
+
 
     public void Regenerate() => GenerateMaze();
 }

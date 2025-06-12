@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSceneName: Game
-  startGameButton: {fileID: 0}
+  startGameButton: {fileID: 907904653}
 --- !u!1 &793144369
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,10 +382,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 613598020}
-        m_TargetAssemblyTypeName: PlayButton, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 613598022}
+        m_TargetAssemblyTypeName: MainMenuNavigator, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

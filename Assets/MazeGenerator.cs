@@ -51,8 +51,8 @@ public class MazeGenerator : MonoBehaviour
         Tilemap.ClearAllTiles();
 
         // Fill entire grid with walls
-        for (int x = -2; x < Width*scale; x++)
-            for (int y = -2; y < Height*scale; y++)
+        for (int x = -8; x < Width*scale+8; x++)
+            for (int y = -8; y < Height*scale+8; y++)
                 Tilemap.SetTile(new Vector3Int(x, y, 0), Wall);
 
         bool[,] visited = new bool[Width, Height];

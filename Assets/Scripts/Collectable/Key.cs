@@ -4,37 +4,25 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+    public string Colour;
     [SerializeField]
-    private static int _keyCount;
-    private string[] color;
-    [SerializeField]
-    private string colour;
+    private PlayerInventory playerInventory;
     public GameObject door;
     private bool doorDestroyed;
+
+    public Key(string colour)
+    {
+        this.Colour = colour;
+    }
     private void Start()
     {
-        string[] colour = new string[3];
     }
-    public void OnTriggerEnter(Collider other)
-    {
-        PlayerInventory playerInventory = other.GetComponentInParent<PlayerInventory>(); // check if collison is with char
-
-        if (playerInventory != null)
-        {
-            gameObject.SetActive(false);
-            //playerInventory.CoinCollected();
-            // add color to array and sort in alpha order
-            _keyCount++;
-        }
-    }
-
     private void Update()
     {
-        if(_keyCount == 3 && !doorDestroyed)
+        if(playerInventory.count == 5 && !doorDestroyed)
         {
             doorDestroyed = true;
             Destroy(door);
-            //print ("Congrats! You've collected the {BubbleSort(colour)} keys");
         }
     }
 

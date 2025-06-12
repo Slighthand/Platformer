@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class CoinManager : MonoBehaviour
 {
-    public static int coinCount = 0;
-    public TextMeshProUGUI coinText;
+    public static int CoinCount = 0;
+    public TextMeshProUGUI CoinText;
 
     void Update()
     {
-        coinText.text = coinCount.ToString();
+        CoinText.text = CoinCount.ToString();
     }
 }

@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    public string Colour;
     [SerializeField]
-    private PlayerInventory playerInventory;
-    public GameObject door;
-    private bool doorDestroyed;
+    private string _colour;
+    [SerializeField]
+    private PlayerInventory _playerInventory;
+    [SerializeField]
+    private GameObject _door;
+    private bool _doorDestroyed;
 
-    public Key(string colour)
+    public string GetColour()
     {
-        this.Colour = colour;
+        return _colour;
     }
+
     private void Start()
     {
     }
     private void Update()
     {
-        if(playerInventory.count == 5 && !doorDestroyed)
+        if(_playerInventory.Count == 5 && !_doorDestroyed)
         {
-            doorDestroyed = true;
-            Destroy(door);
+            _doorDestroyed = true;
+            Destroy(_door);
         }
     }
 

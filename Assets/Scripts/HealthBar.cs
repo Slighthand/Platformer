@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -7,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
+    public int MaxHealth;
+    public int CurrentHealth;
+
     [SerializeField] Health health;
     [SerializeField] Slider slider;
     [SerializeField] Image sliderfill;
@@ -17,14 +19,32 @@ public class HealthBar : MonoBehaviour
 
     void Start() { SetHealthSlider(); }
 
-
     public void SetHealthSlider()
     {
-        slider.value = (float)health.CurrentHealth / health.MaxHealth;
-        if (sliderfill != null && gradient != null) sliderfill.color = gradient.Evaluate(slider.value);
-        if (sliderfill == null) {
+        slider.maxValue = health.MaxHealth;
+        slider.value = health.CurrentHealth;
+
+        if (sliderfill != null && gradient != null)
+        {
+            float value = (float)health.CurrentHealth / health.MaxHealth;
+            sliderfill.color = gradient.Evaluate(value);
+        }
+
+        if (sliderfill == null)
+        {
             SceneManager.LoadScene("EndScreen");
         }
     }
+
     
+    public void AddExtraHeart(int amount)
+    {
+        MaxHealth += amount;
+        CurrentHealth += amount;
+
+        
+        health.MaxHealth = MaxHealth;
+        health.CurrentHealth = CurrentHealth;
+        
+    }
 }

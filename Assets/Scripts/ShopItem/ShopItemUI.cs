@@ -1,42 +1,41 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopItemUI : MonoBehaviour
 {
     public Image icon;
-    public Text itemName;
-    public Text cost;
-    public Text owned;
+    public TMP_Text nameText;
+    public TMP_Text costText;
+    public TMP_Text ownedText;
     public Button buyButton;
 
-    PowerUps powerUp;
-    ShopManager shopManager;
-    GameObject player;
+    private PowerUps powerUp;
+    private ShopManager shopManager;
 
-    public void Setup(PowerUps powerUp, ShopManager shopManager, GameObject player)
+    public void Setup(PowerUps powerUp, ShopManager shopManager)
     {
         this.powerUp = powerUp;
         this.shopManager = shopManager;
-        this.player = player;
 
         icon.sprite = powerUp.Icon;
-        itemName.text = powerUp.Name;
-        cost.text = $"Cost: {powerUp.Cost}";
-        UpdateOwned();
+        nameText.text = powerUp.Name;
+        costText.text = $"Cost: {powerUp.Cost} coins";
+        UpdateOwnedText();
 
-        buyButton.onClick.AddListener(BuyItem);
+        buyButton.onClick.AddListener(BuyPowerUp);
     }
 
-    void BuyItem()
+    void BuyPowerUp()
     {
         if (shopManager.TryBuy(powerUp))
         {
-            UpdateOwned();
+            UpdateOwnedText();
         }
     }
 
-    void UpdateOwned()
+    void UpdateOwnedText()
     {
-        owned.text = $"Owned: x{powerUp.Quantity}";
+        ownedText.text = $"Owned: x{powerUp.Owned}";
     }
 }

@@ -1,36 +1,65 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
+
 
 public class ShopManager : MonoBehaviour
 {
-    public GameObject shopItemPrefab;
-    public Transform shopPanel;
-    public List<PowerUps> powerUps;
     public GameObject player;
-    public int coins = 300;
+    public Transform shopPanel; // The right-side UI panel
+    public GameObject PowerUpsUIPrefab;
+
+    public Sprite heartIcon, speedIcon, shieldIcon;
+
+    private List<PowerUps> powerUpsList = new List<PowerUps>();
 
     void Start()
     {
-        foreach (var powerUp in powerUps)
+        // Composition: the manager owns the items
+        powerUpsList.Add(new ExtraHeart(heartIcon));
+        powerUpsList.Add(new SpeedBoost(speedIcon));
+        powerUpsList.Add(new Shield(shieldIcon));
+
+        SortPowerUps();
+        DisplayShop();
+    }
+
+    public void SortPowerUps()
+    {
+        // Alphabetical sort
+        powerUpsList.Sort((a, b) => a.Name.CompareTo(b.Name));
+    }
+
+    public PowerUps SearchPowerUp(string name)
+    {
+        foreach (var item in powerUpsList)
         {
-            GameObject item = Instantiate(shopItemPrefab, shopPanel);
-            ShopItemUI ui = item.GetComponent<ShopItemUI>();
-            ui.Setup(powerUp, this, player);
+            if (item.Name.ToLower() == name.ToLower())
+                return item;
+        }
+        return null;
+    }
+
+    void DisplayShop()
+    {
+        foreach (var item in powerUpsList)
+        {
+            GameObject ui = Instantiate(PowerUpsUIPrefab, shopPanel);
+            ShopItemUI shopUI = ui.GetComponent<ShopItemUI>();
+            shopUI.Setup(item, this);
         }
     }
 
-    public bool TryBuy(PowerUps powerUp)
+    public bool TryBuy(PowerUps item)
     {
-        if (coins >= powerUp.Cost)
+        if (CoinManager.CoinCount >= item.Cost)
         {
-            coins -= powerUp.Cost;
-            powerUp.Quantity++;
-            powerUp.ApplyEffect(player);
+            CoinManager.CoinCount -= item.Cost;
+            item.Owned++;
+            item.ApplyEffect(player);
             return true;
         }
-
-        Debug.Log("Not enough coins!");
         return false;
     }
 }

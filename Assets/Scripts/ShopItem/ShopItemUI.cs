@@ -11,11 +11,13 @@ public class ShopItemUI : MonoBehaviour
 
     private PowerUps powerUp;
     private ShopManager shopManager;
+    private GameObject player;
 
-    public void Setup(PowerUps powerUp, ShopManager shopManager)
+    public void Setup(PowerUps powerUp, ShopManager shopManager, GameObject player)
     {
         this.powerUp = powerUp;
         this.shopManager = shopManager;
+        this.player = player;
 
         icon.sprite = powerUp.Icon;
         nameText.text = powerUp.Name;
@@ -25,10 +27,25 @@ public class ShopItemUI : MonoBehaviour
         buyButton.onClick.AddListener(BuyPowerUp);
     }
 
-    void BuyPowerUp()
-    {
-      
+    void BuyPowerUp() {
+        if (shopManager.TryBuy(powerUp)) {
+            // actually do effect
+            print(powerUp.Name);
+            if (powerUp.Name == "Shield") {
+                
+                player.GetComponent<PlayerMovement>().ActivateShield();
+            }
+            if (powerUp.Name == "Extra Heart") {
+                player.GetComponent<PlayerHealth>().CurrentHealth++;
+            }
+            if (powerUp.Name == "Speed Boost") {
+                player.GetComponent<PlayerMovement>().speed ++;
+            }
+            if (powerUp.Name == "Bomb") {
+                print("aaaa");
+                player.GetComponent<PlayerAttack>().bombCount++;
+            }
+        }
     }
-
   
 }

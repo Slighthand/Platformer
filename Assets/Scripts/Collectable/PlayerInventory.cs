@@ -75,6 +75,7 @@ public class PlayerInventory : MonoBehaviour
 
     Transform FindRuby()
     {
+        if (mazeGenerator == null) return null;
         foreach (Transform coin in mazeGenerator.coins)
         {
             if (coin == null) continue;

@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour {
     [Space, Header("Bomb")]
     [SerializeField] Rigidbody2D bombFab;
     [SerializeField] Tilemap groundTilemap;
-    [SerializeField] float bombCount = 5;
+    [SerializeField] public float bombCount = 5;
     [SerializeField] TextMeshProUGUI BombText;
 
     [NonSerialized, ShowInDebugInspector] public AttackState state;
@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour {
         input = transform.root.GetComponent<PlayerInputCoordinator>();
         health = GetComponent<PlayerHealth>();
         movement = GetComponent<PlayerMovement>();
-        BombText.text = bombCount.ToString();
+        if (BombText != null)BombText.text = bombCount.ToString();
     }
 
     void OnDisable() {
@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour {
             Vector2 direction = (target.position - transform.position).normalized;
 
             float angle = Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            print(angle);
+            // print(angle);
 
             Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
             rotaty.rotation = targetRotation;
@@ -73,8 +73,8 @@ public class PlayerAttack : MonoBehaviour {
             bomba.GetComponent<Bomb>().targetTilemap = groundTilemap;
             bomba.transform.position = transform.position;
             bombCount--;
-            BombText.text = bombCount.ToString();
         }
+        if (BombText != null) BombText.text = bombCount.ToString();
     }
 
     void Attack(AttackInfo attackInfo) { StartCoroutine(AttackCoroutine(attackInfo)); }

@@ -4,6 +4,8 @@ using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
+
+    public PlayerAttack attack;
     [SerializeField] private Transform playerTransform;
 
     // The maximum distance from the player for an enemy to start following.")]
@@ -86,6 +88,8 @@ public class EnemyManager : MonoBehaviour
         }
         // bubble sort end
 
+        if (attack != null) attack.target = enemiesWithDistances[0].enemy.transform;
+
         // Now that the list is sorted by distance (closest first), update enemy following statu
         foreach (EnemyProximity ep in enemiesWithDistances)
         {
@@ -103,5 +107,7 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
+
+
     }
 }

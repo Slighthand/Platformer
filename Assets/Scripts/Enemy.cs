@@ -12,6 +12,12 @@ public class Enemy : MonoBehaviour
     private bool isFollowing = false;
     public event Action<int> OnEnemyDefeated;
 
+    Rigidbody2D physics;
+
+    void Start() {
+        physics = GetComponent<Rigidbody2D>();
+    }
+
     // tell the enemy whether to follow or stop following
     public void SetFollowing(bool follow)
     {
@@ -44,7 +50,9 @@ public class Enemy : MonoBehaviour
             Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
 
             // Move the enemy towards the player.
-            transform.position += directionToPlayer * followSpeed * Time.deltaTime;
+            
+            physics.velocity = directionToPlayer * followSpeed;
+            // transform.position += directionToPlayer * followSpeed * Time.deltaTime;
         }
     }
 }

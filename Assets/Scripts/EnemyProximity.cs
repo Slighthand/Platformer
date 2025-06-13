@@ -88,7 +88,7 @@ public class EnemyManager : MonoBehaviour
         }
         // bubble sort end
 
-        if (attack != null) attack.target = enemiesWithDistances[0].enemy.transform;
+        // if (attack != null) attack.target = enemiesWithDistances[0].enemy.transform;
 
         // Now that the list is sorted by distance (closest first), update enemy following statu
         foreach (EnemyProximity ep in enemiesWithDistances)

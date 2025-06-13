@@ -51,10 +51,12 @@ public class EnemyStats : MonoBehaviour
             }
             // Insert the new ID at the found index.
             defeatedEnemyIDs.Insert(index, enemyID);
+            Debug.Log($"Inserted {enemyID}, count is {defeatedEnemyIDs.Count}");
             UpdateUI();
         }
         else
         {
+            Debug.Log($"Already has defeated enemy ID {enemyID}");
             // no duplicates allowed
         }
     }

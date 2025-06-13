@@ -7,6 +7,6 @@ public class BackToGame : MonoBehaviour
 {
     public static void StartGame(string scene)
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
 }

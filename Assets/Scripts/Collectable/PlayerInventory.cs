@@ -27,7 +27,6 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Key collected");
             _keyCollected = true;
-            //key.BubbleSort(keys);
             Destroy(other.gameObject);
         }
     }
@@ -35,6 +34,27 @@ public class PlayerInventory : MonoBehaviour
     public void AddKey(Key key)
     {
         Keys[Count++] = key.GetColour();
+        BubbleSort(Keys);
+    }
+
+    public static void BubbleSort(string[] keys)
+    {
+        for (int j = 0; j < keys.Length; j++)
+        {
+            bool swapped = false;
+            for (int i = 0; i < keys.Length - 1; i++)
+            {
+                if (string.Compare(keys[i], keys[i + 1]) > 0)
+                {
+                    string temp = keys[i];
+                    keys[i] = keys[i + 1];
+                    keys[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (swapped == false)
+                break;
+        }
     }
 
     void Update()
@@ -63,14 +83,5 @@ public class PlayerInventory : MonoBehaviour
         noRuby = true;
         return null;
     }
-
-    //private void Update()
-    //{
-
-    //    if (NumberOfCoins >= scoreGoal)
-    //    {
-    //        UnityEngine.SceneManagement.SceneManager.LoadScene("VictoryScreen");
-    //    }
-    //}
 
 }

@@ -7,14 +7,10 @@ public class EnemyStats : MonoBehaviour
 {
 // list of defeated enemy IDs
     [SerializeField] private List<int> defeatedEnemyIDs = new List<int>();
-
-    [Tooltip("Reference to a Text UI element to display defeated enemy count.")]
-    [SerializeField] private TextMeshProUGUI defeatedCountText; // Requires TextMeshPro
+    [SerializeField] public TextMeshProUGUI defeatedCountText;
 
     void Awake()
     {
-        // Ensure the list is sorted at the start, though it should stay sorted through AddDefeatedEnemy.
-        // This is a defensive measure.
         defeatedEnemyIDs.Sort();
         UpdateUI();
     }
@@ -33,7 +29,6 @@ public class EnemyStats : MonoBehaviour
     void OnDisable()
     {
         // Unsubscribe from defeat events to prevent memory leaks.
-        // It's good practice to unsubscribe from events you've subscribed to.
         Enemy[] allEnemies = FindObjectsOfType<Enemy>();
         foreach (Enemy enemy in allEnemies)
         {
@@ -41,24 +36,21 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-    /// Adds a defeated enemy's ID to the sorted list, ensuring no duplicates.
-    /// This method inserts the new ID in the correct position to maintain the sorted order.
-    /// <param name="enemyID">The ID of the defeated enemy.</param>
+    /// Adds a defeated enemy's ID to the sorted list, ensures no duplicates.
     public void AddDefeatedEnemy(int enemyID)
     {
         // First, check if the enemyID is already in the list using binary search.
         if (!HasDefeatedEnemy(enemyID))
         {
             // If not present, find the correct insertion point to maintain sorted order.
-            int insertIndex = 0;
+            int index = 0;
             // Iterate until we find an ID greater than the new ID, or reach the end of the list.
-            while (insertIndex < defeatedEnemyIDs.Count && defeatedEnemyIDs[insertIndex] < enemyID)
+            while (index < defeatedEnemyIDs.Count && defeatedEnemyIDs[index] < enemyID)
             {
-                insertIndex++;
+                index++;
             }
             // Insert the new ID at the found index.
-            defeatedEnemyIDs.Insert(insertIndex, enemyID);
-            Debug.Log($"Added unique defeated enemy ID: {enemyID}. Total unique defeated: {defeatedEnemyIDs.Count}");
+            defeatedEnemyIDs.Insert(index, enemyID);
             UpdateUI();
         }
         else
@@ -66,7 +58,6 @@ public class EnemyStats : MonoBehaviour
             // no duplicates allowed
         }
     }
-    /// Checks if a specific enemy ID has been defeated using a binary search algorithm.
     /// Requires the 'defeatedEnemyIDs' list to be sorted for correctness.
 
     public bool HasDefeatedEnemy(int enemyID)

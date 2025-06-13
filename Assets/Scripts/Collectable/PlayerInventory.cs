@@ -11,6 +11,8 @@ public class PlayerInventory : MonoBehaviour
     public bool noRuby = false;
 
     [Header("Keys")]
+    public Key key;
+    private bool _keyCollected;
     public string[] Keys = new string[5];
     public int Count = 0;
 
@@ -23,10 +25,35 @@ public class PlayerInventory : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Key"))
         {
-            Key key = other.GetComponentInParent<Key>();
-            Keys[Count++] = key.GetColour();
-            //key.BubbleSort(keys);
+            Debug.Log("Key collected");
+            _keyCollected = true;
             Destroy(other.gameObject);
+        }
+    }
+
+    public void AddKey(Key key)
+    {
+        Keys[Count++] = key.GetColour();
+        BubbleSort(Keys);
+    }
+
+    public static void BubbleSort(string[] keys)
+    {
+        for (int j = 0; j < keys.Length; j++)
+        {
+            bool swapped = false;
+            for (int i = 0; i < keys.Length - 1; i++)
+            {
+                if (string.Compare(keys[i], keys[i + 1]) > 0)
+                {
+                    string temp = keys[i];
+                    keys[i] = keys[i + 1];
+                    keys[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (swapped == false)
+                break;
         }
     }
 
@@ -56,14 +83,5 @@ public class PlayerInventory : MonoBehaviour
         noRuby = true;
         return null;
     }
-
-    //private void Update()
-    //{
-
-    //    if (NumberOfCoins >= scoreGoal)
-    //    {
-    //        UnityEngine.SceneManagement.SceneManager.LoadScene("VictoryScreen");
-    //    }
-    //}
 
 }

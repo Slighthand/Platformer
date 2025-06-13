@@ -25,6 +25,10 @@ public class PlayerAttack : MonoBehaviour {
     bool lagged => Time.time < lagTime;
     PlayerInputCoordinator input;
 
+    [Header("rotaty")]
+    public Transform target;
+    public Transform rotaty;
+
     PlayerHealth health;
     PlayerMovement movement;
 
@@ -43,6 +47,19 @@ public class PlayerAttack : MonoBehaviour {
 
 
     protected void Update() {
+        // point towards
+        if (target != null) {
+            Vector2 direction = (target.position - transform.position).normalized;
+
+            float angle = Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            print(angle);
+
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+            rotaty.rotation = targetRotation;
+        }
+
+
+
         if (!lagged) lockDirection = false;
         if (!lockDirection && input.Movement.x != 0) direction = input.Movement.x > 0 ? 1 : -1;
 

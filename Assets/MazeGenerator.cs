@@ -65,6 +65,16 @@ public class MazeGenerator : MonoBehaviour
                     loot[j] = loot[j + 1];
                     loot[j + 1] = temp;
                 }
+                else if (loot[j].Value == loot[j + 1].Value)
+                {
+                    if (loot[j].Weight < loot[j + 1].Weight)
+                    {
+                        // swap
+                        CoinPickup temp = loot[j];
+                        loot[j] = loot[j + 1];
+                        loot[j + 1] = temp;
+                    }
+                }
             }
         }
     }

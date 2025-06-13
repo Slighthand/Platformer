@@ -3,6 +3,8 @@ using UnityEngine;
 using static Wabubby.Extensions;
 using static UnityEngine.Mathf;
 using System;
+using UnityEngine.Tilemaps;
+using TMPro;
 
 public class PlayerAttack : MonoBehaviour {
 
@@ -10,6 +12,11 @@ public class PlayerAttack : MonoBehaviour {
     [SerializeField] AttackInfo attackInfo;
     [SerializeField, Range(0, 1)] float attackInvincibilityTime = 1;
 
+    [Space, Header("Bomb")]
+    [SerializeField] Rigidbody2D bombFab;
+    [SerializeField] Tilemap groundTilemap;
+    [SerializeField] float bombCount = 5;
+    [SerializeField] TextMeshProUGUI BombText;
 
     [NonSerialized, ShowInDebugInspector] public AttackState state;
     [NonSerialized, ShowInDebugInspector] public int direction = 0;
@@ -25,6 +32,7 @@ public class PlayerAttack : MonoBehaviour {
         input = transform.root.GetComponent<PlayerInputCoordinator>();
         health = GetComponent<PlayerHealth>();
         movement = GetComponent<PlayerMovement>();
+        BombText.text = bombCount.ToString();
     }
 
     void OnDisable() {
@@ -41,6 +49,14 @@ public class PlayerAttack : MonoBehaviour {
 
         if (!lagged && input.Attack) {
             Attack(attackInfo);
+        }
+
+        if (!lagged && input.BombAction.WasPressedThisFrame() && bombCount > 0) {
+            Rigidbody2D bomba = Instantiate(bombFab);
+            bomba.GetComponent<Bomb>().targetTilemap = groundTilemap;
+            bomba.transform.position = transform.position;
+            bombCount--;
+            BombText.text = bombCount.ToString();
         }
     }
 

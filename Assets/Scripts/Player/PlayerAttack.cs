@@ -3,6 +3,8 @@ using UnityEngine;
 using static Wabubby.Extensions;
 using static UnityEngine.Mathf;
 using System;
+using UnityEngine.Tilemaps;
+using TMPro;
 
 public class PlayerAttack : MonoBehaviour {
 
@@ -10,6 +12,11 @@ public class PlayerAttack : MonoBehaviour {
     [SerializeField] AttackInfo attackInfo;
     [SerializeField, Range(0, 1)] float attackInvincibilityTime = 1;
 
+    [Space, Header("Bomb")]
+    [SerializeField] Rigidbody2D bombFab;
+    [SerializeField] Tilemap groundTilemap;
+    [SerializeField] float bombCount = 5;
+    [SerializeField] TextMeshProUGUI BombText;
 
     [NonSerialized, ShowInDebugInspector] public AttackState state;
     [NonSerialized, ShowInDebugInspector] public int direction = 0;
@@ -18,6 +25,10 @@ public class PlayerAttack : MonoBehaviour {
     bool lagged => Time.time < lagTime;
     PlayerInputCoordinator input;
 
+    [Header("rotaty")]
+    public Transform target;
+    public Transform rotaty;
+
     PlayerHealth health;
     PlayerMovement movement;
 
@@ -25,6 +36,7 @@ public class PlayerAttack : MonoBehaviour {
         input = transform.root.GetComponent<PlayerInputCoordinator>();
         health = GetComponent<PlayerHealth>();
         movement = GetComponent<PlayerMovement>();
+        BombText.text = bombCount.ToString();
     }
 
     void OnDisable() {
@@ -35,12 +47,33 @@ public class PlayerAttack : MonoBehaviour {
 
 
     protected void Update() {
+        // point towards
+        if (target != null) {
+            Vector2 direction = (target.position - transform.position).normalized;
+
+            float angle = Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            print(angle);
+
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+            rotaty.rotation = targetRotation;
+        }
+
+
+
         if (!lagged) lockDirection = false;
         if (!lockDirection && input.Movement.x != 0) direction = input.Movement.x > 0 ? 1 : -1;
 
 
         if (!lagged && input.Attack) {
             Attack(attackInfo);
+        }
+
+        if (!lagged && input.BombAction.WasPressedThisFrame() && bombCount > 0) {
+            Rigidbody2D bomba = Instantiate(bombFab);
+            bomba.GetComponent<Bomb>().targetTilemap = groundTilemap;
+            bomba.transform.position = transform.position;
+            bombCount--;
+            BombText.text = bombCount.ToString();
         }
     }
 

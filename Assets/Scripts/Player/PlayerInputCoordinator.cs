@@ -10,10 +10,12 @@ public class PlayerInputCoordinator : MonoBehaviour
     [field: SerializeField] public Vector2 Movement {private set; get;}
     [field: SerializeField] public bool Attack {private set; get;}
     [field: SerializeField] public bool Interact {private set; get;}
+    [field: SerializeField] public bool Bomb {private set; get;}
 
     public InputAction TransAction;
     public InputAction AttackAction;
     public InputAction InteractAction;
+    public InputAction BombAction;
 
     void SetupInput() {
         control = new PlayerControl(); // make new Input asset
@@ -29,9 +31,13 @@ public class PlayerInputCoordinator : MonoBehaviour
         control.Player.Interact.performed += context => Interact = context.ReadValueAsButton();
         control.Player.Interact.canceled += context => Interact = context.ReadValueAsButton();
 
+        control.Player.Bomb.performed += context => Interact = context.ReadValueAsButton();
+        control.Player.Bomb.canceled += context => Interact = context.ReadValueAsButton();
+
          // for that extra information
         AttackAction = control.Player.Attack;
         InteractAction = control.Player.Interact;
+        BombAction = control.Player.Bomb;
     }
 
     void OnEnable() {

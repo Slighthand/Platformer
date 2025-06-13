@@ -109,7 +109,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (defeatedCountText != null)
         {
-            defeatedCountText.text = defeatedCountText.ToString();
+            defeatedCountText.text = $"Defeated: {GetDefeatedEnemyCount()}";
         }
     }
 }

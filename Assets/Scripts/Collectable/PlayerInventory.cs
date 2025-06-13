@@ -59,11 +59,13 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        if (noRuby) return;
+        if (noRuby) {
+            compassPointer.gameObject.SetActive(false);
+            return;
+        }
         if (hasRubyCompass)
         {
-            if (ruby == null)
-            {
+            if (ruby == null) {
                 ruby = FindRuby();
             }
             if (noRuby) return;
@@ -75,8 +77,8 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (Transform coin in mazeGenerator.coins)
         {
-            if (coin.name.Contains("Ruby"))
-            {
+            if (coin == null) continue;
+            if (coin.name.Contains("Ruby")) {
                 return coin;
             }
         }

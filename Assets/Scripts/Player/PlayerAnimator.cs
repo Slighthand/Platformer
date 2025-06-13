@@ -76,7 +76,7 @@ public class PlayerAnimator : AnimatorController
         else {
             NormalAnim();
         }
-        transform.localScale = new Vector3(direction, 1, 1);
+        // transform.localScale = new Vector3(direction, 1, 1);
     }
 
 }

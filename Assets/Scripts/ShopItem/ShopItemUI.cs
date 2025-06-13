@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
 
 public class ShopItemUI : MonoBehaviour
 {
     public Image icon;
-    public TMP_Text nameText;
-    public TMP_Text costText;
-    public TMP_Text ownedText;
+    public Text nameText;
+    public Text costText;
     public Button buyButton;
 
     private PowerUps powerUp;
@@ -21,21 +20,15 @@ public class ShopItemUI : MonoBehaviour
         icon.sprite = powerUp.Icon;
         nameText.text = powerUp.Name;
         costText.text = $"Cost: {powerUp.Cost} coins";
-        UpdateOwnedText();
+       
 
         buyButton.onClick.AddListener(BuyPowerUp);
     }
 
     void BuyPowerUp()
     {
-        if (shopManager.TryBuy(powerUp))
-        {
-            UpdateOwnedText();
-        }
+      
     }
 
-    void UpdateOwnedText()
-    {
-        ownedText.text = $"Owned: x{powerUp.Owned}";
-    }
+  
 }

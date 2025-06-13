@@ -13,7 +13,7 @@ public class PlayerInventory : MonoBehaviour
     [Header("Keys")]
     public Key key;
     private bool _keyCollected;
-    public string[] Keys = new string[5];
+    public string[] Keys = new string[6];
     public int Count = 0;
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -27,6 +27,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Key collected");
             _keyCollected = true;
+            AddKey(key);
             Destroy(other.gameObject);
         }
     }

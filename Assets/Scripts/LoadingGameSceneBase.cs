@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadingGameSceneBase : MonoBehaviour
 {
-    /// Loads a specified scene by its name.
-    /// This method is virtual, meaning derived classes can optionally override it
-    /// to add their own specific logic before or after loading.
+    /// Loads a specified scene by name
     public virtual void LoadScene(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName))

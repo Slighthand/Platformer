@@ -79,7 +79,7 @@ public class EnemyManager : MonoBehaviour
                 // If the current element's distance is greater than the next element's distance, swap them.
                 if (enemiesWithDistances[j].distance > enemiesWithDistances[j + 1].distance)
                 {
-                    // Perform the swap.
+                    // swap
                     EnemyProximity temp = enemiesWithDistances[j];
                     enemiesWithDistances[j] = enemiesWithDistances[j + 1];
                     enemiesWithDistances[j + 1] = temp;
@@ -90,7 +90,7 @@ public class EnemyManager : MonoBehaviour
 
         // if (attack != null) attack.target = enemiesWithDistances[0].enemy.transform;
 
-        // Now that the list is sorted by distance (closest first), update enemy following statu
+        // list is sorted by distance (closest first), update enemy following status
         foreach (EnemyProximity ep in enemiesWithDistances)
         {
             if (ep.enemy != null) // Double check enemy is not null after sorting

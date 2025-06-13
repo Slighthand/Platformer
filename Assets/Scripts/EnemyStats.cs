@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyStats : MonoBehaviour
 {
 // list of defeated enemy IDs
-    [SerializeField] private List<int> defeatedEnemyIDs = new List<int>();
+    [SerializeField] public List<int> defeatedEnemyIDs = new List<int>();
     [SerializeField] public TextMeshProUGUI defeatedCountText;
 
     void Awake()

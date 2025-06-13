@@ -1,15 +1,18 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public class PowerUps
 {
-    public string Name { get; private set; }
-    public int Cost { get; private set; }
-    public Sprite Icon { get; private set; }
-    public int Owned { get; set; }
+    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public int Cost { get; private set; }
+    [field: SerializeField] public Sprite Icon { get; private set; }
+    [field: SerializeField] public int Owned { get; set; }
 
     public PowerUps(string name, int cost, Sprite icon)
     {
         Name = name;
+        if (Name == null) Name = "empty";
         Cost = cost;
         Icon = icon;
         Owned = 0;
@@ -20,7 +23,7 @@ public class PowerUps
 
 public class SpeedBoost : PowerUps
 {
-    public SpeedBoost(Sprite icon) : base("Speed Boost", 1, icon) { }
+    public SpeedBoost(Sprite icon) : base("Speed Boost", 10, icon) { }
 
     public override void ApplyEffect(GameObject player)
     {
@@ -61,5 +64,19 @@ public class Shield : PowerUps
         {
             movement.ActivateShield();
         }
+    }
+}
+
+public class BombPowerup : PowerUps
+{
+    public BombPowerup(Sprite icon) : base("Bomb", 5, icon) { }
+
+    public override void ApplyEffect(GameObject player)
+    {
+        // PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        // if (movement != null)
+        // {
+        //     movement.ActivateShield();
+        // }
     }
 }

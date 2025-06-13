@@ -13,4 +13,9 @@ public class CoinManager : MonoBehaviour
     {
         CoinText.text = CoinCount.ToString();
     }
+
+    [ContextMenu("Give 100 coins please")]
+    public void Give100Coins() {
+        CoinCount = 100;
+    }
 }

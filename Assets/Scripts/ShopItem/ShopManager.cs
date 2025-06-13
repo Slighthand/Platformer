@@ -10,16 +10,16 @@ public class ShopManager : MonoBehaviour
     public Transform shopPanel; // The right-side UI panel
     public GameObject PowerUpsUIPrefab;
 
-    public Sprite heartIcon, speedIcon, shieldIcon;
+    public Sprite heartSprite, speedSprite, shieldSprite, bombSprite;
 
-    private List<PowerUps> powerUpsList = new List<PowerUps>();
+    [SerializeField] private List<PowerUps> powerUpsList = new List<PowerUps>();
 
-    void Start()
-    {
-        // Composition: the manager owns the items
-        powerUpsList.Add(new ExtraHeart(heartIcon));
-        powerUpsList.Add(new SpeedBoost(speedIcon));
-        powerUpsList.Add(new Shield(shieldIcon));
+    void Start() {
+        powerUpsList.Clear();
+        powerUpsList.Add(new ExtraHeart(heartSprite));
+        powerUpsList.Add(new SpeedBoost(speedSprite));
+        powerUpsList.Add(new Shield(shieldSprite));
+        powerUpsList.Add(new BombPowerup(bombSprite));
 
         SortPowerUps();
         DisplayShop();
@@ -41,23 +41,24 @@ public class ShopManager : MonoBehaviour
         return null;
     }
 
-    void DisplayShop()
-    {
-        foreach (var item in powerUpsList)
+    void DisplayShop() {
+        print(powerUpsList.Count);
+        foreach (PowerUps item in powerUpsList)
         {
+            print(item.Name);
             GameObject ui = Instantiate(PowerUpsUIPrefab, shopPanel);
             ShopItemUI shopUI = ui.GetComponent<ShopItemUI>();
-            shopUI.Setup(item, this);
+            shopUI.Setup(item, this, player);
         }
     }
 
-    public bool TryBuy(PowerUps item)
+    public bool TryBuy(PowerUps powerup)
     {
-        if (CoinManager.CoinCount >= item.Cost)
+        if (CoinManager.CoinCount >= powerup.Cost)
         {
-            CoinManager.CoinCount -= item.Cost;
-            item.Owned++;
-            item.ApplyEffect(player);
+            CoinManager.CoinCount -= powerup.Cost;
+            powerup.Owned++;
+            powerup.ApplyEffect(player);
             return true;
         }
         return false;

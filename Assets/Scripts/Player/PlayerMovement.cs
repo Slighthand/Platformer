@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerInputCoordinator input;
 
      //Shield-related
+    public GameObject shieldObject;
     private bool shieldActive = false;
     private float shieldTimer = 0f;
     [SerializeField] private float shieldDuration = 5f;
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         if (shieldActive)
         {
             shieldTimer -= Time.deltaTime;
+            GetComponent<PlayerHealth>().canDamage = false;
             if (shieldTimer <= 0)
             {
                 DeactivateShield();
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     public void ActivateShield()
     {
         shieldActive = true;
+        shieldObject.SetActive(true);
         shieldTimer = shieldDuration;
         Debug.Log("Shield Activated!");
        
@@ -53,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     private void DeactivateShield()
     {
         shieldActive = false;
+        shieldObject.SetActive(false);
+        GetComponent<PlayerHealth>().canDamage = true;
         Debug.Log("Shield Deactivated!");
        
     }
